@@ -25,6 +25,11 @@ define types::file (
   $source                  = undef,
   $sourceselect            = undef,
   $target                  = undef,
+  $before                  = undef,
+  $notify                  = undef,
+  $require                 = undef,
+  $subscribe               = undef,
+  $tag                     = undef,
 ) {
 
   # validate params
@@ -58,5 +63,10 @@ define types::file (
     source                  => $source,
     sourceselect            => $sourceselect,
     target                  => $target,
+    before                  => $before,
+    notify                  => $notify,
+    require                 => $require,
+    subscribe               => $subscribe,
+    tag                     => $tag,
   }
 }

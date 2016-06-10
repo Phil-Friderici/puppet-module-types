@@ -13,6 +13,11 @@ define types::cron (
   $target      = undef,
   $user        = undef,
   $weekday     = undef,
+  $before      = undef,
+  $notify      = undef,
+  $require     = undef,
+  $subscribe   = undef,
+  $tag         = undef,
 ) {
 
   # validate params
@@ -32,5 +37,10 @@ define types::cron (
     target      => $target,
     user        => $user,
     weekday     => $weekday,
+    before      => $before,
+    notify      => $notify,
+    require     => $require,
+    subscribe   => $subscribe,
+    tag         => $tag,
   }
 }

@@ -3,8 +3,14 @@
 define types::file_line (
   $path,
   $line,
-  $match  = undef,
-  $ensure = 'present',
+  $match     = undef,
+  $ensure    = 'present',
+  $before    = undef,
+  $notify    = undef,
+  $require   = undef,
+  $subscribe = undef,
+  $tag       = undef,
+
 ) {
 
   validate_re($ensure, '^(present)|(absent)$',
@@ -17,9 +23,14 @@ define types::file_line (
   }
 
   file_line { $name:
-    ensure => $ensure,
-    path   => $path,
-    line   => $line,
-    match  => $match,
+    ensure    => $ensure,
+    path      => $path,
+    line      => $line,
+    match     => $match,
+    before    => $before,
+    notify    => $notify,
+    require   => $require,
+    subscribe => $subscribe,
+    tag       => $tag,
   }
 }

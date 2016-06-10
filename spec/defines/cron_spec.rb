@@ -31,6 +31,11 @@ describe 'types::cron' do
         :target      => 'root',
         :user        => 'root',
         :weekday     => '6',
+        :before      => 'File[before]',
+        :notify      => 'File[notify]',
+        :require     => 'File[require]',
+        :subscribe   => 'File[subscribe]',
+        :tag         => 'rspec-tag',
       }
     end
     let(:facts) { { :osfamily => 'RedHat' } }
@@ -49,6 +54,11 @@ describe 'types::cron' do
         'target'      => 'root',
         'user'        => 'root',
         'weekday'     => '6',
+        'before'      => 'File[before]',
+        'notify'      => 'File[notify]',
+        'require'     => 'File[require]',
+        'subscribe'   => 'File[subscribe]',
+        'tag'         => 'rspec-tag',
       })
     }
   end
