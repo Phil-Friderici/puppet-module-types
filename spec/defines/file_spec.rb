@@ -1,74 +1,37 @@
 require 'spec_helper'
 describe 'types::file' do
-  let(:title) { '/tmp/foo' }
+  let(:title) { '/tmp/file1' }
 
-  context 'file with no options specified' do
-    it { should contain_file('/tmp/foo').with({
-        'ensure'  => 'present',
-        'owner'   => 'root',
-        'group'   => 'root',
-        'mode'    => '0644',
-      })
-    }
-  end
-
-  context 'file with all options specified' do
+  context 'file with metaparameters specified' do
     let(:params) do
       { :ensure                  => 'present',
-        :mode                    => '0777',
-        :owner                   => 'root',
-        :group                   => 'root',
-        :content                 => 'This is the content',
-        :backup                  => 'foobucket',
-        :checksum                => 'none',
-        :force                   => 'purge',
-        :ignore                  => ['.svn', '.foo'],
-        :links                   => 'follow',
-        :provider                => 'posix',
-        :purge                   => true,
-        :recurse                 => true,
-        :recurselimit            => 2,
-        :replace                 => false,
-        :selinux_ignore_defaults => false,
-        :selrange                => 's0',
-        :selrole                 => 'object_r',
-        :seltype                 => 'var_t',
-        :seluser                 => 'system_u',
-        :show_diff               => false,
-        :source                  => 'puppet://modules/types/mydir',
-        :sourceselect            => 'first',
+        :before                  => 'File[before]',
+        :notify                  => 'File[notify]',
+        :require                 => 'File[require]',
+        :subscribe               => 'File[subscribe]',
+        :tag                     => 'rspec-tag',
       }
     end
 
-    it {
-      should contain_file('/tmp/foo').with({
-        'ensure'                  => 'present',
-        'mode'                    => '0777',
-        'owner'                   => 'root',
-        'group'                   => 'root',
-        'content'                 => 'This is the content',
-        'backup'                  => 'foobucket',
-        'checksum'                => 'none',
-        'force'                   => 'purge',
-        'ignore'                  => ['.svn', '.foo'],
-        'links'                   => 'follow',
-        'provider'                => 'posix',
-        'purge'                   => true,
-        'recurse'                 => true,
-        'recurselimit'            => 2,
-        'replace'                 => false,
-        'selinux_ignore_defaults' => false,
-        'selrange'                => 's0',
-        'selrole'                 => 'object_r',
-        'seltype'                 => 'var_t',
-        'seluser'                 => 'system_u',
-        'show_diff'               => false,
-        'source'                  => 'puppet://modules/types/mydir',
-        'sourceselect'            => 'first',
-      })
-    }
-  end
+    it { should contain_file('/tmp/file1').without_before }
+    it { should contain_file('/tmp/file1').without_notify }
+    it { should contain_file('/tmp/file1').without_require }
+    it { should contain_file('/tmp/file1').without_subscribe }
+    it { should contain_file('/tmp/file1').with_tag('rspec-tag') }
 
+    it do
+      should contain_file('/tmp/file1').only_with({
+        'ensure'    => 'present',
+        'before'    => nil,
+        'notify'    => nil,
+        'require'   => nil,
+        'subscribe' => nil,
+        'tag'       => 'rspec-tag',
+      })
+    end
+  end
+end
+=begin
   describe 'with ensure' do
     ['present','absent','file','directory','link'].each do |value|
       context "set to #{value}" do
@@ -119,3 +82,4 @@ describe 'types::file' do
     end
   end
 end
+=end
