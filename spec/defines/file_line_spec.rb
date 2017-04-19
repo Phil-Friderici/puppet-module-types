@@ -21,18 +21,28 @@ describe 'types::file_line' do
   context 'file_line with all parameters specified' do
     let(:params) do
       {
-        :ensure => 'present',
-        :path   => '/tmp/foo',
-        :line   => 'option=asdf',
-        :match  => '^option',
+        :ensure    => 'present',
+        :path      => '/tmp/foo',
+        :line      => 'option=asdf',
+        :match     => '^option',
+        :before    => 'File[before]',
+        :notify    => 'File[notify]',
+        :require   => 'File[require]',
+        :subscribe => 'File[subscribe]',
+        :tag       => 'rspec-tag',
       }
     end
 
     it { should contain_file_line('some_file').with({
-        'ensure' => 'present',
-        'path'   => '/tmp/foo',
-        'line'   => 'option=asdf',
-        'match'  => '^option',
+        'ensure'    => 'present',
+        'path'      => '/tmp/foo',
+        'line'      => 'option=asdf',
+        'match'     => '^option',
+        'before'    => 'File[before]',
+        'notify'    => 'File[notify]',
+        'require'   => 'File[require]',
+        'subscribe' => 'File[subscribe]',
+        'tag'       => 'rspec-tag',
       })
     }
   end

@@ -37,6 +37,11 @@ describe 'types::file' do
         :show_diff               => false,
         :source                  => 'puppet://modules/types/mydir',
         :sourceselect            => 'first',
+        :before                  => 'File[before]',
+        :notify                  => 'File[notify]',
+        :require                 => 'File[require]',
+        :subscribe               => 'File[subscribe]',
+        :tag                     => 'rspec-tag',
       }
     end
 
@@ -65,6 +70,11 @@ describe 'types::file' do
         'show_diff'               => false,
         'source'                  => 'puppet://modules/types/mydir',
         'sourceselect'            => 'first',
+        'before'                  => 'File[before]',
+        'notify'                  => 'File[notify]',
+        'require'                 => 'File[require]',
+        'subscribe'               => 'File[subscribe]',
+        'tag'                     => 'rspec-tag',
       })
     }
   end
